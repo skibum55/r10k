@@ -40,7 +40,7 @@ module MCollective
             cmd << 'push'   if action == 'push'
             cmd << 'pull'   if action == 'pull'
             cmd << 'status' if action == 'status'
-            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => arg )
+            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => arg,:environment => {"PATH" => "BAR"} )
           when 'cache','synchronize','sync', 'deploy'
             cmd = r10k
             cmd << 'cache' if action == 'cache'
@@ -48,7 +48,10 @@ module MCollective
             if action == 'deploy'
               cmd << 'deploy' << 'environment' << arg << '-p'
             end
-            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
+            # Fix for https://github.com/acidprime/r10k/issues/65
+            # Should help PE clients work and not hurt FOSS users
+            path = "#{ENV['PATH']}:/opt/puppet/bin"
+            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true,:environment => {'PATH' => path})
         end
       end
     end
