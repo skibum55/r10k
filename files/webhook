@@ -41,8 +41,8 @@ opts = {
         :ServerType         => WEBrick::Daemon,
         :SSLEnable          => $config['enable_ssl'],
         :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
-        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")).read),
-        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")).read),
+#        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")).read),
+#        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")).read),
         :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
 }
 
