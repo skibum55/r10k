@@ -20,7 +20,7 @@ require 'cgi'
 include MCollective::RPC
 
 
-WEBHOOK_CONFIG = '/etc/webhook.yaml'
+WEBHOOK_CONFIG = <%= scope.lookupvar('::r10k::webhook::config') || '/etc/webhook.yaml' %>
 PIDFILE        = '/var/run/webhook/webhook.pid'
 APP_ROOT       = '/var/run/webhook'
 

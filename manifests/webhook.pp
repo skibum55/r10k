@@ -34,7 +34,7 @@ class r10k::webhook(
   }
 
   file { 'webhook_bin':
-    source => 'puppet:///modules/r10k/webhook',
+    content => template('r10k/webhook.erb'),
     path   => '/usr/local/bin/webhook',
     notify => Service['webhook'],
   }
